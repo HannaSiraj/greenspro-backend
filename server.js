@@ -20,7 +20,7 @@ app.disable('x-powered-by');
 // Enable CORS with credentials
 app.use(cors({
   origin: process.env.FRONTEND_URL,
-  credentials: true,
+  // credentials: true,
 }));
 
 // Middleware
