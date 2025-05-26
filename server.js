@@ -23,6 +23,7 @@ app.disable('x-powered-by');
 const corsOptions = {
   origin: 'https://greenspro-frontend-o5uj.vercel.app',
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true, // if you use cookies/auth, else can be false
 };
 
