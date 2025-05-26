@@ -24,10 +24,10 @@ const corsOptions = {
   origin: 'https://greenspro-frontend-o5uj.vercel.app',
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
-  credentials: true, // if you use cookies/auth, else can be false
+  credentials: true,
 };
-
 app.use(cors(corsOptions));
+// app.options('*', cors(corsOptions));  // enable preflight for all routes
 // app.use(cors({
 //   origin: process.env.FRONTEND_URL,
 //   // credentials: true,
@@ -46,8 +46,13 @@ app.get('/', (req, res) => {
   res.send('Server is up and running ✅');
 });
 
+app.use((err, req, res, next) => {
+  console.error('Unexpected error:', err);
+  res.status(500).json({ message: 'Internal server error' });
+});
+
 // Start server
-const PORT = process.env.PORT ;
+const PORT = process.env.PORT;
 console.log(`Running in ${process.env.NODE_ENV || 'development'} mode`);
 app.listen(PORT, () => console.log(`✅ Server running on port ${PORT}`));
 
