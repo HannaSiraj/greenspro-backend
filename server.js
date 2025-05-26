@@ -6,6 +6,8 @@ const cookieParser = require('cookie-parser');
 const authRoutes = require('./routes/auth');
 const adminRoutes = require('./routes/admin');
 
+
+
 // Load env variables
 dotenv.config();
 
@@ -18,10 +20,17 @@ app.use(helmet());
 app.disable('x-powered-by');
 
 // Enable CORS with credentials
-app.use(cors({
-  origin: process.env.FRONTEND_URL,
-  // credentials: true,
-}));
+const corsOptions = {
+  origin: 'https://greenspro-frontend-o5uj.vercel.app',
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  credentials: true, // if you use cookies/auth, else can be false
+};
+
+app.use(cors(corsOptions));
+// app.use(cors({
+//   origin: process.env.FRONTEND_URL,
+//   // credentials: true,
+// }));
 
 // Middleware
 app.use(express.json());
